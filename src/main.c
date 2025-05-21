@@ -35,9 +35,16 @@ int main(int argc, char **argv) {
     
     dimension(configuration.filenames[0]);
   }
-  /*
-   * TO COMPLETE
-   */
-  
+
+  if ( strcmp( configuration.command, "tenth_pixel" ) == 0 ) {
+    
+    tenth_pixel(configuration.filenames[0]);
+  }
+
+  if ( strcmp( configuration.command, "first_pixel" ) == 0 ) {
+    
+    first_pixel(configuration.filenames[0]);
+  }
+
   return 0;
 }

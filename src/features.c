@@ -16,7 +16,6 @@ void helloWorld() {
 }
 
 void dimension(char* filename){
-    printf("Dimensions %s\n", filename);
 
     unsigned char* data;
     int width, height, channel_count;
@@ -28,3 +27,33 @@ void dimension(char* filename){
         free_image_data(data);
     }
 }
+
+void tenth_pixel (char *filename) {
+
+    unsigned char* data;
+    int width, height, channel_count;
+
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+        printf("tenth_pixel : %d, %d, %d\n", data[27], data[28], data[29]);
+        free_image_data(data);
+    }
+}
+
+
+void first_pixel (char *filename) {
+
+    unsigned char* data;
+    int width, height, channel_count;
+
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+        printf("first_pixel : %d, %d, %d\n", data[0], data[1], data[2]);
+        free_image_data(data);
+    }
+}
+
