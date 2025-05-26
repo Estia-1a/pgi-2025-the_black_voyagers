@@ -100,3 +100,33 @@ void max_pixel(char *filename){
     }
 }
 
+
+void min_pixel(char *filename){
+
+    unsigned char* data;
+    int width, height, channel_count;
+
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+
+        int x, y, i, R,G,B;
+        int min = data[0] + data[1] + data[2];
+        for (i =0;i < height*width;i++){
+            
+            if ((data[i*3] + data[i*3+1] + data[i*3+2])< min){
+                min = (data[i*3] + data[i*3+1] + data[i*3+2]);
+                y = i / width;
+                x = i % width;
+                R = data[i*3];
+                G = data[i*3+1];
+                B = data[i*3+2];
+            }
+            
+        }
+        printf("min_pixel (%d, %d): %d, %d, %d\n", x, y, R, G, B);
+        free_image_data(data);
+
+    }
+}

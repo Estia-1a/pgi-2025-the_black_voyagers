@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
     
     first_pixel(configuration.filenames[0]);
   }
-  
+
 
   if ( strcmp( configuration.command, "second_line" ) == 0 ) {
     
@@ -56,6 +56,11 @@ int main(int argc, char **argv) {
   if ( strcmp( configuration.command, "max_pixel" ) == 0 ) {
     
     max_pixel(configuration.filenames[0]);
+  }
+
+   if ( strcmp( configuration.command, "min_pixel" ) == 0 ) {
+    
+    min_pixel(configuration.filenames[0]);
   }
 
   return 0;
