@@ -57,3 +57,16 @@ void first_pixel (char *filename) {
     }
 }
 
+void second_line(char *filename){
+
+    unsigned char* data;
+    int width, height, channel_count;
+
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+        printf("second_line: %d, %d, %d\n", data[width*3], data[width*3+1], data[width*3+2]);
+        free_image_data(data);
+    }
+}
