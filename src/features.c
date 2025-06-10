@@ -130,3 +130,29 @@ void min_pixel(char *filename){
 
     }
 }
+
+void color_red(char* filename){
+
+    unsigned char* data;
+    int width, height, channel_count;
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+        int pixel_count = width * height;
+        for (int i = 0; i < pixel_count; i++) {
+            int base = i * channel_count;
+            data[base + 1] = 0;
+            data[base + 2] = 0;
+        }
+
+        const char *out = "image_out.bmp";
+        if (write_image_data(out, data, width, height) == 0) {
+            printf("Erreur écriture image : %s\n", out);
+        }
+
+        printf("Voir le document: %s\n", out);
+        
+        free_image_data(data);
+    }
+}

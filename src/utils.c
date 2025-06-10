@@ -43,20 +43,11 @@ void print_pixel(char *filename, int x, int y) {
 
     
         if (p == NULL) {
-            fprintf(stderr,
-                    "Coordonnées (%d,%d) hors image de taille %dx%d\n",
-                    x, y, width, height);
-            free_image_data(data);
+            printf("Coordonnées (%d,%d) hors image de taille %dx%d\n", x, y, width, height);
         }
-
     
-        printf("print_pixel (%d, %d): %d, %d, %d\n",
-           x, y,
-           p->R,
-           p->G,
-           p->B);
-
-    
+        printf("print_pixel (%d, %d): %d, %d, %d\n", x, y, p->R, p->G, p->B);
+        
         free_image_data(data);
     }
 }

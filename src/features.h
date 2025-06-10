@@ -9,6 +9,6 @@ void first_pixel (char *filename);
 void second_line (char *filename);
 void max_pixel (char *filename);
 void min_pixel (char *filename);
-
+void color_red (char *filename);
 
 #endif

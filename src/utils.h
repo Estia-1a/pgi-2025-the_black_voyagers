@@ -19,4 +19,5 @@ pixelRGB * get_pixel( unsigned char* data, const unsigned int width, const unsig
 
 void print_pixel(char *filename, int x, int y);
 
+
 #endif

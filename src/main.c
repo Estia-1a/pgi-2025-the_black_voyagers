@@ -70,6 +70,11 @@ int main(int argc, char **argv) {
     min_pixel(configuration.filenames[0]);
   }
 
+  if ( strcmp( configuration.command, "color_red" ) == 0 ) {
+    
+    color_red(configuration.filenames[0]);
+  }
+
   return 0;
 }
 
