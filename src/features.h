@@ -19,5 +19,6 @@ void max_component(char *filename, char* arg);
 void min_component(char *filename, char* arg);
 void rotate_cw(char *filename);
 void mirror_horizontal(char *filename);
+void rotate_acw(char *filename);
 
 #endif
