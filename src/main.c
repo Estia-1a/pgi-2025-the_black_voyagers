@@ -119,6 +119,12 @@ int main(int argc, char **argv) {
 
     
   }
+   if ( strcmp( configuration.command, "mirror_vertical" ) == 0 ) {
+    
+    mirror_vertical(configuration.filenames[0]);
+
+    
+  }
 
 
   return 0;

@@ -18,6 +18,7 @@ void color_gray_luminance(char *filename);
 void max_component(char *filename, char* arg);
 void min_component(char *filename, char* arg);
 void mirror_horizontal(char *filename);
+void mirror_vertical(char *filename);
 
 
 #endif
