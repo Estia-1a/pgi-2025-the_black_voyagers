@@ -208,3 +208,34 @@ void color_blue(char* filename){
         free_image_data(data);
     }
 }
+
+void color_gray(char* filename){
+
+    unsigned char* data;
+    int width, height, channel_count;
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+        int pixel_count = width * height;
+        for (int i = 0; i < pixel_count; ++i) {
+            int base = i * channel_count;
+            unsigned char r = data[base + 0];
+            unsigned char g = data[base + 1];
+            unsigned char b = data[base + 2];
+            unsigned char gray = (r + g + b) / 3;
+            data[base + 0] = gray;
+            data[base + 1] = gray;
+            data[base + 2] = gray;
+        }
+
+        const char *out = "image_out.bmp";
+        if (write_image_data(out, data, width, height) != 0) {
+            printf("Erreur écriture image : %s\n", out);
+        }
+
+        printf("Voir le document: %s\n", out);
+        
+        free_image_data(data);
+    }
+}
