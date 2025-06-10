@@ -156,3 +156,55 @@ void color_red(char* filename){
         free_image_data(data);
     }
 }
+
+void color_green(char* filename){
+
+    unsigned char* data;
+    int width, height, channel_count;
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+        int pixel_count = width * height;
+        for (int i = 0; i < pixel_count; i++) {
+            int base = i * channel_count;
+            data[base] = 0;
+            data[base + 2] = 0;
+        }
+
+        const char *outG = "image_outG.bmp";
+        if (write_image_data(outG, data, width, height) == 0) {
+            printf("Erreur écriture image : %s\n", outG);
+        }
+
+        printf("Voir le document: %s\n", outG);
+        
+        free_image_data(data);
+    }
+}
+
+void color_blue(char* filename){
+
+    unsigned char* data;
+    int width, height, channel_count;
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+        int pixel_count = width * height;
+        for (int i = 0; i < pixel_count; i++) {
+            int base = i * channel_count;
+            data[base] = 0;
+            data[base + 1] = 0;
+        }
+
+        const char *outB = "image_outB.bmp";
+        if (write_image_data(outB, data, width, height) == 0) {
+            printf("Erreur écriture image : %s\n", outB);
+        }
+
+        printf("Voir le document: %s\n", outB);
+        
+        free_image_data(data);
+    }
+}
