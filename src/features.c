@@ -286,8 +286,6 @@ void rotate_cw(const char* filename) {
     unsigned char* data = NULL;
     int w, h, n;
     read_image_data(filename, &data, &w, &h, &n);
-    
-    unsigned char* output_data = (unsigned char*)malloc(w * h * n * sizeof(unsigned char));
 
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
@@ -301,7 +299,6 @@ void rotate_cw(const char* filename) {
         }
     }
     write_image_data("image_out.bmp", output_data, h, w);
-    free(output_data);
     
     printf("Image tournée à 90deg sens horaire\n");
 }
