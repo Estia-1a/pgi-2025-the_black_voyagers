@@ -172,12 +172,12 @@ void color_green(char* filename){
             data[base + 2] = 0;
         }
 
-        const char *outG = "image_outG.bmp";
-        if (write_image_data(outG, data, width, height) == 0) {
-            printf("Erreur écriture image : %s\n", outG);
+        const char *out = "image_out.bmp";
+        if (write_image_data(out, data, width, height) == 0) {
+            printf("Erreur écriture image : %s\n", out);
         }
 
-        printf("Voir le document: %s\n", outG);
+        printf("Voir le document: %s\n", out);
         
         free_image_data(data);
     }
@@ -198,12 +198,12 @@ void color_blue(char* filename){
             data[base + 1] = 0;
         }
 
-        const char *outB = "image_outB.bmp";
-        if (write_image_data(outB, data, width, height) == 0) {
-            printf("Erreur écriture image : %s\n", outB);
+        const char *out = "image_out.bmp";
+        if (write_image_data(out, data, width, height) == 0) {
+            printf("Erreur écriture image : %s\n", out);
         }
 
-        printf("Voir le document: %s\n", outB);
+        printf("Voir le document: %s\n", out);
         
         free_image_data(data);
     }
