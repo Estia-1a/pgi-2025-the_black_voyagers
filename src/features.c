@@ -266,3 +266,10 @@ void color_invert(char* filename){
         free_image_data(data);
     }
 }
+void color_gray(char *source_path){
+    unsigned char* data = NULL;
+    int w, h, n, x, y;
+    read_image_data(source_path, &data, &w, &h, &n);
+    for(y=0; y<h; y++){
+
+}
