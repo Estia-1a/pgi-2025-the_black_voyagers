@@ -1,6 +1,6 @@
 #include <estia-image.h>
 #include <stdio.h>
-
+#include <stdlib.h>
 #include "features.h"
 #include "utils.h"
 
@@ -267,7 +267,7 @@ void color_invert(char* filename){
     }
 }
 void color_gray_luminance(char *filename){
-    unsigned char* data = NULL;
+    unsigned char* data;
     int w, h, n, x, y;
     read_image_data(filename, &data, &w, &h, &n);
     for(y=0; y<h; y++){
@@ -280,4 +280,29 @@ void color_gray_luminance(char *filename){
         }
     }
     write_image_data("image_out.bmp", data, w, h);
+    free_image_data(data);
+}
+
+void rotate_cw(const char* filename) {
+    unsigned char* data = NULL;
+    int w, h, n;
+    read_image_data(filename, &data, &w, &h, &n);
+    
+    unsigned char* output_data = (unsigned char*)malloc(w * h * n * sizeof(unsigned char));
+
+    for (int y = 0; y < h; y++) {
+        for (int x = 0; x < w; x++) {
+            int new_x = h - 1 - y;
+            int new_y = x;
+            for (int c = 0; c < n; c++) {
+                int old_index = (y * w + x) * n + c;
+                int new_index = (new_y * h + new_x) * n + c;
+                output_data[new_index] = data[old_index];
+            }
+        }
+    }
+    write_image_data("image_out.bmp", output_data, h, w);
+    free(output_data);
+    
+    printf("Image tournée à 90deg sens horaire\n");
 }
