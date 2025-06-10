@@ -266,10 +266,18 @@ void color_invert(char* filename){
         free_image_data(data);
     }
 }
-void color_gray(char *source_path){
+void color_gray_luminance(char *source_path){
     unsigned char* data = NULL;
     int w, h, n, x, y;
     read_image_data(source_path, &data, &w, &h, &n);
     for(y=0; y<h; y++){
-
+        for(x=0; x<w; x++){      
+            pixelRGB * pixel = get_pixel(data, w, h, n, x, y);
+            unsigned char value = 0.21 * pixel->R + 0.72 * pixel->G + 0.07 * pixel->B;
+            pixel->R=value;
+            pixel->G=value;
+            pixel->B=value;
+        }
+    }
+    write_image_data("image_out.bmp", data, w, h);
 }
