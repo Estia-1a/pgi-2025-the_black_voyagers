@@ -94,7 +94,10 @@ int main(int argc, char **argv) {
     
     color_invert(configuration.filenames[0]);
   }
-
+  if ( strcmp( configuration.command, "color_gray_luminance" ) == 0 ) {
+    
+    color_gray_luminance(configuration.filenames[0]);
+  }
   return 0;
 }
 
