@@ -99,10 +99,21 @@ int main(int argc, char **argv) {
     
     color_gray_luminance(configuration.filenames[0]);
   }
+
   if ( strcmp( configuration.command, "max_component" ) == 0 ) {
     
     max_component(configuration.filenames[0], configuration.arguments[0]);
+
+    
   }
-  return 0;
+
+  if ( strcmp( configuration.command, "min_component" ) == 0 ) {
+    
+    min_component(configuration.filenames[0], configuration.arguments[0]);
+
+    
+  }
 }
+
+
 
