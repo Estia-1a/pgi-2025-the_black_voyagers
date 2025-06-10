@@ -40,84 +40,53 @@ int main(int argc, char **argv) {
     /* helloworld() function is defined in feature.h and implemented in feature.c */
     helloWorld();
   }
-  else if ( strcmp( configuration.command, "dimension" ) == 0 ) {
-    
+  else if ( strcmp( configuration.command, "dimension" ) == 0 ) { 
     dimension(configuration.filenames[0]);
   }
-
-  if ( strcmp( configuration.command, "tenth_pixel" ) == 0 ) {
-    
+  if ( strcmp( configuration.command, "tenth_pixel" ) == 0 ) { 
     tenth_pixel(configuration.filenames[0]);
   }
-
-  if ( strcmp( configuration.command, "first_pixel" ) == 0 ) {
-    
+  if ( strcmp( configuration.command, "first_pixel" ) == 0 ) { 
     first_pixel(configuration.filenames[0]);
   }
-
-
-  if ( strcmp( configuration.command, "second_line" ) == 0 ) {
-    
+  if ( strcmp( configuration.command, "second_line" ) == 0 ) { 
     second_line(configuration.filenames[0]);
   }
-
-  if ( strcmp( configuration.command, "max_pixel" ) == 0 ) {
-    
+  if ( strcmp( configuration.command, "max_pixel" ) == 0 ) { 
     max_pixel(configuration.filenames[0]);
   }
-
-   if ( strcmp( configuration.command, "min_pixel" ) == 0 ) {
-    
+   if ( strcmp( configuration.command, "min_pixel" ) == 0 ) { 
     min_pixel(configuration.filenames[0]);
   }
-
-  if ( strcmp( configuration.command, "color_red" ) == 0 ) {
-    
+  if ( strcmp( configuration.command, "color_red" ) == 0 ) { 
     color_red(configuration.filenames[0]);
   }
-
-  if ( strcmp( configuration.command, "color_green" ) == 0 ) {
-    
+  if ( strcmp( configuration.command, "color_green" ) == 0 ) { 
     color_green(configuration.filenames[0]);
   }
-
-  if ( strcmp( configuration.command, "color_blue" ) == 0 ) {
-    
+  if ( strcmp( configuration.command, "color_blue" ) == 0 ) { 
     color_blue(configuration.filenames[0]);
   }
-
-  if ( strcmp( configuration.command, "color_gray" ) == 0 ) {
-    
+  if ( strcmp( configuration.command, "color_gray" ) == 0 ) { 
     color_gray(configuration.filenames[0]);
   }
-
   if ( strcmp( configuration.command, "color_invert" ) == 0 ) {
-    
     color_invert(configuration.filenames[0]);
   }
-  if ( strcmp( configuration.command, "color_gray_luminance" ) == 0 ) {
-    
+  if ( strcmp( configuration.command, "color_gray_luminance" ) == 0 ) { 
     color_gray_luminance(configuration.filenames[0]);
   }
-
   if ( strcmp( configuration.command, "max_component" ) == 0 ) {
-    
-    max_component(configuration.filenames[0], configuration.arguments[0]);
-
-    
+    max_component(configuration.filenames[0], configuration.arguments[0]); 
   }
-
   if ( strcmp( configuration.command, "min_component" ) == 0 ) {
-    
-    min_component(configuration.filenames[0], configuration.arguments[0]);
-
-    
+    min_component(configuration.filenames[0], configuration.arguments[0]); 
+  }
+  if ( strcmp( configuration.command, "rotate_cw" ) == 0 ) {
+    rotate_cw(configuration.filenames[0]);
   }
   if ( strcmp( configuration.command, "mirror_horizontal" ) == 0 ) {
-    
-    mirror_horizontal(configuration.filenames[0]);
-
-    
+    mirror_horizontal(configuration.filenames[0]);    
   }
    if ( strcmp( configuration.command, "mirror_vertical" ) == 0 ) {
     
