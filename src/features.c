@@ -288,7 +288,6 @@ void max_component(char *filename, char* arg){
     unsigned char* data;
     int width, height, channel_count;
     char lettre = arg[0];
-    //int value = atoi(argv[5]);
 
     if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
         printf("Erreur avec le fichier : %s\n",filename);
@@ -368,6 +367,7 @@ void min_component(char *filename, char* arg){
         free_image_data(data);
 
     }
+
 }
 
 void rotate_cw(char*filename){
@@ -390,3 +390,46 @@ void rotate_cw(char*filename){
     write_image_data("image_out.bmp", data, h, w);
 
 }
+void mirror_horizontal(char* filename){
+    unsigned char* data;
+    int width, height, channel_count;
+    int R1, G1, B1;
+    
+    
+
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+        int  i,j,  R,G,B;
+        for (i =0;i < height;i++){
+
+            for(j=0;j< width/2;j++){
+            
+                R = data[(i*width + j)*3];
+                G = data[(i*width + j)*3+1];
+                B = data[(i*width + j)*3+2];
+                R1= data[(i* width + (width-1-j))*3];
+                G1= data[(i* width + (width-1-j))*3+ 1];
+                B1= data[(i* width + (width-1-j))*3+ 2];
+
+                data[(i*width + j)*3] = R1;
+                data[(i*width + j)*3+1]=G1;
+                data[(i*width + j)*3+2]=B1;
+
+                data[(i* width + (width-1-j))*3] = R;
+                data[(i* width + (width-1-j))*3+1] = G;
+                data[(i* width + (width-1-j))*3+ 2] = B;
+
+
+                
+            }
+        }
+
+
+    }
+    write_image_data("image_out.bmp", data, width, height);
+
+}
+
+
