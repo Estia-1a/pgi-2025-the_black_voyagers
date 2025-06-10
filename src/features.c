@@ -1,6 +1,7 @@
 #include <estia-image.h>
 #include <stdio.h>
-
+#include <stdlib.h>
+#include <string.h>
 #include "features.h"
 #include "utils.h"
 /**
@@ -367,4 +368,25 @@ void min_component(char *filename, char* arg){
         free_image_data(data);
 
     }
+}
+
+void rotate_cw(char*filename){
+    unsigned char* data;
+    int w, h, n;
+     read_image_data(filename, &data, &w, &h, &n);
+     unsigned char* temp = malloc(w * h * n);
+     memcpy(temp, data, w * h * n);
+     for (int y = 0; y < h; y++) {
+        for (int x = 0; x < w; x++) {
+            int new_x = h - 1 - y;
+            int new_y = x;
+            for (int c = 0; c < n; c++) {
+                int old_index = (y * w + x) * n + c;
+                int new_index = (new_y * h + new_x) * n + c;
+                data[new_index] = temp[old_index];
+            }
+        }
+    }
+    write_image_data("image_out.bmp", data, h, w);
+
 }

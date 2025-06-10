@@ -17,6 +17,6 @@ void color_invert (char *filename);
 void color_gray_luminance(char *filename);
 void max_component(char *filename, char* arg);
 void min_component(char *filename, char* arg);
-
+void rotate_cw(char *filename);
 
 #endif
