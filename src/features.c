@@ -1,9 +1,9 @@
 #include <estia-image.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "features.h"
 #include "utils.h"
-
 /**
  * @brief Here, you have to code features of the project.
  * Do not forget to commit regurlarly your changes.
@@ -280,4 +280,48 @@ void color_gray_luminance(char *filename){
         }
     }
     write_image_data("image_out.bmp", data, w, h);
+}
+
+void max_component(char *filename, char* arg){
+
+    unsigned char* data;
+    int width, height, channel_count;
+    char lettre = arg[0];
+    //int value = atoi(argv[5]);
+
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+        
+        int x, y, i,max,a;
+        if(lettre == 'R' || lettre == 'r'){
+            a =0;
+        }
+        else if(lettre =='G' || lettre == 'g'){
+            a = 1;
+        }
+        else if(lettre =='B' || lettre == 'b'){
+            a = 2;
+        }
+
+        else{
+            printf("Erreur : la composante n'est pas valide");
+        }
+
+        max = data[a];
+
+        for (i =0;i < height*width;i++){
+            
+            if ((data[i*3 + a]) > max){
+                max = data[i*3 + a] ;
+                y = i / width;
+                x = i % width;
+            }
+            
+        }
+        printf("max_component %c (%d, %d): %d\n",lettre, x, y, max);
+        free_image_data(data);
+
+    }
 }
