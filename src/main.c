@@ -88,9 +88,14 @@ int main(int argc, char **argv) {
   if ( strcmp( configuration.command, "mirror_horizontal" ) == 0 ) {
     mirror_horizontal(configuration.filenames[0]);    
   }
-   if ( strcmp( configuration.command, "mirror_vertical" ) == 0 ) {
-    
+
+  if ( strcmp( configuration.command, "mirror_vertical" ) == 0 ) {    
     mirror_vertical(configuration.filenames[0]);
+  }
+
+  if ( strcmp( configuration.command, "mirror_total" ) == 0 ) {
+    
+    mirror_total(configuration.filenames[0]);
 
     
   }

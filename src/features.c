@@ -428,7 +428,7 @@ void mirror_horizontal(char* filename){
 
 
     }
-    write_image_data("image_out.bmp", data, width, height);
+    write_image_data("image_outh.bmp", data, width, height);
 
 }
 
@@ -470,9 +470,78 @@ void mirror_vertical(char* filename){
 
 
     }
-    write_image_data("image_out.bmp", data, width, height);
+    write_image_data("image_outv.bmp", data, width, height);
 
 }
+
+void mirror_total(char* filename){
+    unsigned char* data;
+    int width, height, channel_count;
+    int R1, G1, B1;
+    
+    
+
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+        int  i,j,  R,G,B;
+        for (i =0;i < height/2;i++){
+
+            for(j=0;j< width;j++){
+            
+                R = data[(i*width + j)*3];
+                G = data[(i*width + j)*3+1];
+                B = data[(i*width + j)*3+2];
+                R1= data[((height-1-i)*width + j)*3];
+                G1= data[((height-1-i)*width + j)*3+ 1];
+                B1= data[((height-1-i)*width + j)*3+ 2];
+
+                data[(i*width + j)*3] = R1;
+                data[(i*width + j)*3+1]=G1;
+                data[(i*width + j)*3+2]=B1;
+
+                data[((height-1-i)*width + j)*3] = R;
+                data[((height-1-i)*width + j)*3+ 1] = G;
+                data[((height-1-i)*width + j)*3+ 2] = B;
+            }
+        }
+
+
+        
+        for (i =0;i < height;i++){
+
+            for(j=0;j< width/2;j++){
+            
+                R = data[(i*width + j)*3];
+                G = data[(i*width + j)*3+1];
+                B = data[(i*width + j)*3+2];
+                R1= data[(i* width + (width-1-j))*3];
+                G1= data[(i* width + (width-1-j))*3+ 1];
+                B1= data[(i* width + (width-1-j))*3+ 2];
+
+                data[(i*width + j)*3] = R1;
+                data[(i*width + j)*3+1]=G1;
+                data[(i*width + j)*3+2]=B1;
+
+                data[(i* width + (width-1-j))*3] = R;
+                data[(i* width + (width-1-j))*3+1] = G;
+                data[(i* width + (width-1-j))*3+ 2] = B;
+
+
+                
+            }
+        
+
+
+                
+        }
+        write_image_data("image_outt.bmp", data, width, height);
+    }
+
+
+}
+
 
 
 
