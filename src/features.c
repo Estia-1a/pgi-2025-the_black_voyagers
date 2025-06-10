@@ -230,7 +230,34 @@ void color_gray(char* filename){
         }
 
         const char *out = "image_out.bmp";
-        if (write_image_data(out, data, width, height) != 0) {
+        if (write_image_data(out, data, width, height) == 0) {
+            printf("Erreur écriture image : %s\n", out);
+        }
+
+        printf("Voir le document: %s\n", out);
+        
+        free_image_data(data);
+    }
+}
+
+void color_invert(char* filename){
+
+    unsigned char* data;
+    int width, height, channel_count;
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+        int pixel_count = width * height;
+        for (int i = 0; i < pixel_count; ++i) {
+            int base = i * channel_count;
+            data[base + 0] = 255 - data[base + 0];
+            data[base + 1] = 255 - data[base + 1];
+            data[base + 2] = 255 - data[base + 2];
+        }
+
+        const char *out = "image_out.bmp";
+        if (write_image_data(out, data, width, height) == 0) {
             printf("Erreur écriture image : %s\n", out);
         }
 

@@ -90,6 +90,11 @@ int main(int argc, char **argv) {
     color_gray(configuration.filenames[0]);
   }
 
+  if ( strcmp( configuration.command, "color_invert" ) == 0 ) {
+    
+    color_invert(configuration.filenames[0]);
+  }
+
   return 0;
 }
 
