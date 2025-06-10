@@ -113,10 +113,6 @@ int main(int argc, char **argv) {
 
     
   }
-}
-
-
-  }
 
  if ( strcmp( configuration.command, "rotate_cw" ) == 0 ) {
     
