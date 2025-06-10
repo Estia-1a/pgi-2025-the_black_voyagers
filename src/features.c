@@ -282,27 +282,6 @@ void color_gray_luminance(char *filename){
     free_image_data(data);
 }
 
-void rotate_cw(const char* filename) {
-    unsigned char* data = NULL;
-    int w, h, n;
-    read_image_data(filename, &data, &w, &h, &n);
-
-    for (int y = 0; y < h; y++) {
-        for (int x = 0; x < w; x++) {
-            int new_x = h - 1 - y;
-            int new_y = x;
-            for (int c = 0; c < n; c++) {
-                int old_index = (y * w + x) * n + c;
-                int new_index = (new_y * h + new_x) * n + c;
-                output_data[new_index] = data[old_index];
-            }
-        }
-    }
-    write_image_data("image_out.bmp", output_data, h, w);
-    
-    printf("Image tournée à 90deg sens horaire\n");
-}
-
 void max_component(char *filename, char* arg){
 
     unsigned char* data;
@@ -346,10 +325,6 @@ void max_component(char *filename, char* arg){
 
     }
 }
-<<<<<<< HEAD
-=======
-
-
 void min_component(char *filename, char* arg){
 
     unsigned char* data;
@@ -393,5 +368,3 @@ void min_component(char *filename, char* arg){
 
     }
 }
-
->>>>>>> 985577ae60636af7f5f23d7a21c7e73587200ec5

@@ -18,7 +18,5 @@ void color_gray_luminance(char *filename);
 void max_component(char *filename, char* arg);
 void min_component(char *filename, char* arg);
 
-void rotate_cw(const char* filename);
-void rotate_acw(const char* filename);
 
 #endif
