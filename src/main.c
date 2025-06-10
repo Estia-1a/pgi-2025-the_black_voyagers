@@ -18,6 +18,7 @@ int main(int argc, char **argv) {
 
   /*DO NOT EDIT THIS PART*/
   Config configuration ;
+
   parse_arguments( argc, argv, &configuration ) ;
   check_debug_mode(configuration);
   check_file();
@@ -97,6 +98,10 @@ int main(int argc, char **argv) {
   if ( strcmp( configuration.command, "color_gray_luminance" ) == 0 ) {
     
     color_gray_luminance(configuration.filenames[0]);
+  }
+  if ( strcmp( configuration.command, "max_component" ) == 0 ) {
+    
+    max_component(configuration.filenames[0], configuration.arguments[0]);
   }
 
  if ( strcmp( configuration.command, "rotate_cw" ) == 0 ) {
