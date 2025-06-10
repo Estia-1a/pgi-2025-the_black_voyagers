@@ -27,6 +27,14 @@ int main(int argc, char **argv) {
   /* Example with helloworld command
    * If helloworld is a called command: freud.exe -f images/input/image.jpeg -c helloworld 
    */
+  if ( strcmp( configuration.command, "print_pixel" ) == 0 ) {
+    
+    int x = atoi(configuration.arguments[0]);
+    int y = atoi(configuration.arguments[1]);
+
+    print_pixel(configuration.filenames[0], x, y) ;
+  }
+
   if ( strncmp( configuration.command, "helloworld", 10 ) == 0 ) {
     /* helloworld() function is defined in feature.h and implemented in feature.c */
     helloWorld();
@@ -51,7 +59,6 @@ int main(int argc, char **argv) {
     
     second_line(configuration.filenames[0]);
   }
-
 
   if ( strcmp( configuration.command, "max_pixel" ) == 0 ) {
     
