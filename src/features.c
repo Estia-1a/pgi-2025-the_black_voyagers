@@ -369,22 +369,20 @@ void min_component(char *filename, char* arg){
         }
         printf("min_component %c (%d, %d): %d\n",lettre, x, y, min);
         free_image_data(data);
-
     }
-
 }
 
 void rotate_cw(char*filename){
     unsigned char* data;
-    int w, h, n;
+    int w, h, n x, y, c;
      read_image_data(filename, &data, &w, &h, &n);
      unsigned char* temp = malloc(w * h * n);
      memcpy(temp, data, w * h * n);
-     for (int y = 0; y < h; y++) {
-        for (int x = 0; x < w; x++) {
+     for (y = 0; y < h; y++) {
+        for (x = 0; x < w; x++) {
             int new_x = h - 1 - y;
             int new_y = x;
-            for (int c = 0; c < n; c++) {
+            for (c = 0; c < n; c++) {
                 int old_index = (y * w + x) * n + c;
                 int new_index = (new_y * h + new_x) * n + c;
                 data[new_index] = temp[old_index];
@@ -392,15 +390,14 @@ void rotate_cw(char*filename){
         }
     }
     write_image_data("image_out.bmp", data, h, w);
-
 }
+
+
 void mirror_horizontal(char* filename){
     unsigned char* data;
     int width, height, channel_count;
     int R1, G1, B1;
     
-    
-
     if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
         printf("Erreur avec le fichier : %s\n",filename);
     }
@@ -423,30 +420,24 @@ void mirror_horizontal(char* filename){
 
                 data[(i* width + (width-1-j))*3] = R;
                 data[(i* width + (width-1-j))*3+1] = G;
-                data[(i* width + (width-1-j))*3+ 2] = B;
-
-
-                
+                data[(i* width + (width-1-j))*3+ 2] = B;                
             }
         }
-
-
     }
     write_image_data("image_outh.bmp", data, width, height);
-
 }
 
 void rotate_acw(char*filename){
     unsigned char* data;
-    int w, h, n;
+    int w, h, n, y, x, c;
      read_image_data(filename, &data, &w, &h, &n);
      unsigned char* temp = malloc(w * h * n);
      memcpy(temp, data, w * h * n);
-     for (int y = 0; y < h; y++) {
-        for (int x = 0; x < w; x++) {
+     for ( y = 0; y < h; y++) {
+        for (x = 0; x < w; x++) {
             int new_x = y;
             int new_y = w - 1 - x;
-            for (int c = 0; c < n; c++) {
+            for (c = 0; c < n; c++) {
                 int old_index = (y * w + x) * n + c;
                 int new_index = (new_y * h + new_x) * n + c;
                 data[new_index] = temp[old_index];
@@ -459,9 +450,7 @@ void rotate_acw(char*filename){
 void mirror_vertical(char* filename){
     unsigned char* data;
     int width, height, channel_count;
-    int R1, G1, B1;
-    
-    
+    int R1, G1, B1;   
 
     if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
         printf("Erreur avec le fichier : %s\n",filename);
@@ -485,25 +474,18 @@ void mirror_vertical(char* filename){
 
                 data[((height-1-i)*width + j)*3] = R;
                 data[((height-1-i)*width + j)*3+ 1] = G;
-                data[((height-1-i)*width + j)*3+ 2] = B;
-
-
-                
+                data[((height-1-i)*width + j)*3+ 2] = B;              
             }
         }
-
-
     }
     write_image_data("image_outv.bmp", data, width, height);
-
 }
 
 void mirror_total(char* filename){
     unsigned char* data;
     int width, height, channel_count;
     int R1, G1, B1;
-    
-    
+
 
     if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
         printf("Erreur avec le fichier : %s\n",filename);
@@ -530,8 +512,6 @@ void mirror_total(char* filename){
                 data[((height-1-i)*width + j)*3+ 2] = B;
             }
         }
-
-
         
         for (i =0;i < height;i++){
 
@@ -550,22 +530,57 @@ void mirror_total(char* filename){
 
                 data[(i* width + (width-1-j))*3] = R;
                 data[(i* width + (width-1-j))*3+1] = G;
-                data[(i* width + (width-1-j))*3+ 2] = B;
-
-
-                
-            }
-        
-
-
-                
+                data[(i* width + (width-1-j))*3+ 2] = B;               
+            }                
         }
         write_image_data("image_outt.bmp", data, width, height);
     }
-
-
 }
 
 
+unsigned char min3(unsigned char a, unsigned char b, unsigned char c) {
+    unsigned char m = a < b ? a : b;
+    return m < c ? m : c;
+}
+
+unsigned char max3(unsigned char a, unsigned char b, unsigned char c) {
+    unsigned char M = a > b ? a : b;
+    return M > c ? M : c;
+}
+
+void color_desaturate(char* filename){
+
+    unsigned char* data;
+    int width, height, channel_count;
+    if (read_image_data(filename, &data, &width, &height, &channel_count) ==0){
+        printf("Erreur avec le fichier : %s\n",filename);
+    }
+    else{
+        int pixel_count = width * height;
+        for (int i = 0; i < pixel_count; ++i) {
+            int base = i * channel_count;
+            unsigned char r = data[base + 0];
+            unsigned char g = data[base + 1];
+            unsigned char b = data[base + 2];
+
+            unsigned char mn = min3(r,g,b);
+            unsigned char mx = max3(r,g,b);
+            unsigned char new_val = (mn + mx) / 2;
+
+            data[base + 0] = new_val;
+            data[base + 1] = new_val;
+            data[base + 2] = new_val;
+        }
+
+        const char *out = "image_out.bmp";
+        if (write_image_data(out, data, width, height) == 0) {
+            printf("Erreur écriture image : %s\n", out);
+        }
+
+        printf("Voir le document: %s\n", out);
+        
+        free_image_data(data);
+    }
+}
 
 
