@@ -424,7 +424,7 @@ void mirror_horizontal(char* filename){
             }
         }
     }
-    write_image_data("image_outh.bmp", data, width, height);
+    write_image_data("image_out.bmp", data, width, height);
 }
 
 void rotate_acw(char*filename){
@@ -478,7 +478,7 @@ void mirror_vertical(char* filename){
             }
         }
     }
-    write_image_data("image_outv.bmp", data, width, height);
+    write_image_data("image_out.bmp", data, width, height);
 }
 
 void mirror_total(char* filename){
@@ -533,7 +533,7 @@ void mirror_total(char* filename){
                 data[(i* width + (width-1-j))*3+ 2] = B;               
             }                
         }
-        write_image_data("image_outt.bmp", data, width, height);
+        write_image_data("image_out.bmp", data, width, height);
     }
 }
 
