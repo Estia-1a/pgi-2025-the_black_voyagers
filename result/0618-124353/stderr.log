@@ -1,0 +1,23 @@
+/home/runner/work/pgi-2025-the_black_voyagers/pgi-2025-the_black_voyagers/src/features.c: In function ‘rotate_cw’:
+/home/runner/work/pgi-2025-the_black_voyagers/pgi-2025-the_black_voyagers/src/features.c:377:17: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘x’
+  377 |     int w, h, n x, y, c;
+      |                 ^
+/home/runner/work/pgi-2025-the_black_voyagers/pgi-2025-the_black_voyagers/src/features.c:378:48: error: ‘n’ undeclared (first use in this function)
+  378 |      read_image_data(filename, &data, &w, &h, &n);
+      |                                                ^
+/home/runner/work/pgi-2025-the_black_voyagers/pgi-2025-the_black_voyagers/src/features.c:378:48: note: each undeclared identifier is reported only once for each function it appears in
+/home/runner/work/pgi-2025-the_black_voyagers/pgi-2025-the_black_voyagers/src/features.c:381:11: error: ‘y’ undeclared (first use in this function)
+  381 |      for (y = 0; y < h; y++) {
+      |           ^
+/home/runner/work/pgi-2025-the_black_voyagers/pgi-2025-the_black_voyagers/src/features.c:382:14: error: ‘x’ undeclared (first use in this function)
+  382 |         for (x = 0; x < w; x++) {
+      |              ^
+/home/runner/work/pgi-2025-the_black_voyagers/pgi-2025-the_black_voyagers/src/features.c:385:18: error: ‘c’ undeclared (first use in this function)
+  385 |             for (c = 0; c < n; c++) {
+      |                  ^
+gmake[2]: *** [CMakeFiles/freud.dir/build.make:93: CMakeFiles/freud.dir/src/features.c.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/freud.dir/all] Error 2
+gmake: *** [Makefile:136: all] Error 2
+
+The process '/usr/local/bin/cmake' failed with exit code 2
