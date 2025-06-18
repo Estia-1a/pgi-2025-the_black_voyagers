@@ -372,15 +372,15 @@ void min_component(char *filename, char* arg){
 
 void rotate_cw(char*filename){
     unsigned char* data;
-    int w, h, n;
+    int w, h, n x, y, c;
      read_image_data(filename, &data, &w, &h, &n);
      unsigned char* temp = malloc(w * h * n);
      memcpy(temp, data, w * h * n);
-     for (int y = 0; y < h; y++) {
-        for (int x = 0; x < w; x++) {
+     for (y = 0; y < h; y++) {
+        for (x = 0; x < w; x++) {
             int new_x = h - 1 - y;
             int new_y = x;
-            for (int c = 0; c < n; c++) {
+            for (c = 0; c < n; c++) {
                 int old_index = (y * w + x) * n + c;
                 int new_index = (new_y * h + new_x) * n + c;
                 data[new_index] = temp[old_index];
@@ -434,15 +434,15 @@ void mirror_horizontal(char* filename){
 
 void rotate_acw(char*filename){
     unsigned char* data;
-    int w, h, n;
+    int w, h, n, y, x, c;
      read_image_data(filename, &data, &w, &h, &n);
      unsigned char* temp = malloc(w * h * n);
      memcpy(temp, data, w * h * n);
-     for (int y = 0; y < h; y++) {
-        for (int x = 0; x < w; x++) {
+     for ( y = 0; y < h; y++) {
+        for (x = 0; x < w; x++) {
             int new_x = y;
             int new_y = w - 1 - x;
-            for (int c = 0; c < n; c++) {
+            for (c = 0; c < n; c++) {
                 int old_index = (y * w + x) * n + c;
                 int new_index = (new_y * h + new_x) * n + c;
                 data[new_index] = temp[old_index];
