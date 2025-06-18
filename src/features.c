@@ -81,9 +81,13 @@ void max_pixel(char *filename){
     }
     else{
 
-        int x, y, i, max = 0, R,G,B;
-        for (i =0;i < height*width;i++){
-            
+        int x, y, i, max = -1 , R,G,B;
+        y = 0;
+        x = 0;
+      
+
+        for (i =0;i <= height*width;i++){
+                        
             if ((data[i*3] + data[i*3+1] + data[i*3+2])> max){
                 max = (data[i*3] + data[i*3+1] + data[i*3+2]);
                 y = i / width;
@@ -112,7 +116,7 @@ void min_pixel(char *filename){
     else{
 
         int x, y, i, R,G,B;
-        int min = data[0] + data[1] + data[2];
+        int min = 255 * 3 + 1;
         for (i =0;i < height*width;i++){
             
             if ((data[i*3] + data[i*3+1] + data[i*3+2])< min){
@@ -309,7 +313,7 @@ void max_component(char *filename, char* arg){
             printf("Erreur : la composante n'est pas valide");
         }
 
-        max = data[a];
+        max = -1;
 
         for (i =0;i < height*width;i++){
             
@@ -352,7 +356,7 @@ void min_component(char *filename, char* arg){
             printf("Erreur : la composante n'est pas valide");
         }
 
-        min = data[a];
+        min = 256;
 
         for (i =0;i < height*width;i++){
             
