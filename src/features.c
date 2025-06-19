@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "features.h"
 #include "utils.h"
 /**
@@ -582,6 +583,134 @@ void color_desaturate(char* filename){
         free_image_data(data);
     }
 }
+
+void scale_nearest(char *filename, char* arg) {
+    unsigned char* data;
+    int width, height, channel_count;
+    float scale_factor = atof(arg); 
+    
+    
+    if (scale_factor <= 0) {
+        printf("Erreur : facteur d'échelle doit être > 0\n");
+        return;
+    }
+    
+    
+    if (read_image_data(filename, &data, &width, &height, &channel_count) == 0) {
+        printf("Erreur avec le fichier : %s\n", filename);
+        return;
+    }
+    
+    
+    int new_width = (int)(scale_factor * width);
+    int new_height = (int)(scale_factor * height);
+    
+    unsigned char* new_data = (unsigned char*)malloc(new_width * new_height * channel_count * sizeof(unsigned char));
+    
+  
+    for (int i = 0; i < new_height; i++) {
+        for (int j = 0; j < new_width; j++) {
+
+            int orig_x = (int)((float)j / scale_factor);
+            int orig_y = (int)((float)i / scale_factor);
+            
+            int new_index = (i * new_width + j) * channel_count;
+            int orig_index = (orig_y * width + orig_x) * channel_count;
+            
+            for (int c = 0; c < channel_count; c++) {
+                new_data[new_index + c] = data[orig_index + c];
+            }
+        }
+    }
+        
+       
+        const char *out = "image_out.bmp";
+        if (write_image_data(out, new_data, new_width, new_height) == 0) {
+            printf("Erreur écriture image : %s\n", out);
+        }
+
+        printf("Voir le document: %s\n", out);
+        
+        free_image_data(data);
+       
+}
+
+void scale_bilinear(char *filename, char* arg) {
+    unsigned char* data;
+    int width, height, channel_count;
+    float scale_factor = atof(arg); 
+    
+    
+    if (scale_factor <= 0) {
+        printf("Erreur : facteur d'échelle doit être > 0\n");
+        return;
+    }
+    
+    
+    if (read_image_data(filename, &data, &width, &height, &channel_count) == 0) {
+        printf("Erreur avec le fichier : %s\n", filename);
+        return;
+    }
+    
+    
+    int new_width = (int)(scale_factor * width);
+    int new_height = (int)(scale_factor * height);
+    
+    unsigned char* new_data = (unsigned char*)malloc(new_width * new_height * channel_count * sizeof(unsigned char));
+    
+  
+    for (int i = 0; i < new_height; i++) {
+        for (int j = 0; j < new_width; j++) {
+
+            float src_x = j / scale_factor;
+            float src_y = i / scale_factor;
+
+            int x1 = (int)floorf(src_x);
+            int y1 = (int)floorf(src_y);
+            int x2 = x1 + 1;
+            int y2 = y1 + 1;
+
+            float dx = src_x - x1;
+            float dy = src_y - y1;
+
+            if (x1 < 0) x1 = 0;
+            if (y1 < 0) y1 = 0;
+            if (x2 >= width)  x2 = width - 1;
+            if (y2 >= height) y2 = height - 1;
+
+            int new_index  = (i * new_width  + j) * channel_count;
+            int base11 = (y1 * width + x1) * channel_count;
+            int base12 = (y1 * width + x2) * channel_count;
+            int base21 = (y2 * width + x1) * channel_count;
+            int base22 = (y2 * width + x2) * channel_count;
+
+            for (int c = 0; c < channel_count; c++) {
+                float Q11 = data[base11 + c];
+                float Q12 = data[base12 + c];
+                float Q21 = data[base21 + c];
+                float Q22 = data[base22 + c];
+
+                float val = Q11 * (1 - dx) * (1 - dy) + Q12 * dx * (1 - dy) + Q21 * (1 - dx) * dy + Q22 * dx * dy;
+
+                if (val < 0) val = 0;
+                else if (val > 255) val = 255;
+                new_data[new_index + c] = (unsigned char)(val + 0.5f);
+            }
+        }
+    }
+        
+       
+        const char *out = "image_out.bmp";
+        if (write_image_data(out, new_data, new_width, new_height) == 0) {
+            printf("Erreur écriture image : %s\n", out);
+        }
+
+        printf("Voir le document: %s\n", out);
+        
+        free_image_data(data);
+       
+}
+ 
 
 
 void scale_crop(char *source_path, int center_x, int center_y, int width, int height){

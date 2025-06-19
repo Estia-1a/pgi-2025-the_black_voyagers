@@ -106,6 +106,15 @@ if ( strncmp( configuration.command, "scale_crop", 10 ) == 0 ) {
     scale_crop(configuration.filenames[0],atoi(configuration.arguments[0]) ,atoi(configuration.arguments[1]) ,atoi(configuration.arguments[2]) ,atoi(configuration.arguments[3]));
   }
 
+  if ( strcmp( configuration.command, "scale_nearest" ) == 0 ) {
+    scale_nearest(configuration.filenames[0], configuration.arguments[0]); 
+  }
+
+  if ( strcmp( configuration.command, "scale_bilinear" ) == 0 ) {
+
+    scale_bilinear(configuration.filenames[0], configuration.arguments[0]); 
+  }
+
   return 0;
 }
 
