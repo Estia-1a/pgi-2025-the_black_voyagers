@@ -18,11 +18,11 @@ void color_gray_luminance(char *filename);
 void max_component(char *filename, char* arg);
 void min_component(char *filename, char* arg);
 void rotate_cw(char *filename);
-void rotate_acw(char *filename);
 void mirror_horizontal(char *filename);
 void rotate_acw(char *filename);
 void mirror_vertical(char *filename);
 void mirror_total(char *filename);
 void color_desaturate(char *filename);
+void scale_nearest(char *filename, char* arg);
 
 #endif

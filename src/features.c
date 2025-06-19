@@ -583,4 +583,57 @@ void color_desaturate(char* filename){
     }
 }
 
+void scale_nearest(char *filename, char* arg) {
+    unsigned char* data;
+    int width, height, channel_count;
+    float scale_factor = atof(arg); 
+    
+    
+    if (scale_factor <= 0) {
+        printf("Erreur : facteur d'échelle doit être > 0\n");
+        return;
+    }
+    
+    
+    if (read_image_data(filename, &data, &width, &height, &channel_count) == 0) {
+        printf("Erreur avec le fichier : %s\n", filename);
+        return;
+    }
+    
+    
+    int new_width = (int)(scale_factor * width);
+    int new_height = (int)(scale_factor * height);
+    
+    unsigned char* new_data = (unsigned char*)malloc(new_width * new_height * channel_count * sizeof(unsigned char));
+    
+  
+    for (int i = 0; i < new_height; i++) {
+        for (int j = 0; j < new_width; j++) {
+
+            int orig_x = (int)((float)j / scale_factor);
+            int orig_y = (int)((float)i / scale_factor);
+            
+            int new_index = (i * new_width + j) * channel_count;
+            int orig_index = (orig_y * width + orig_x) * channel_count;
+            
+            for (int c = 0; c < channel_count; c++) {
+                new_data[new_index + c] = data[orig_index + c];
+            }
+        }
+    }
+        
+       
+        const char *out = "image_out.bmp";
+        if (write_image_data(out, new_data, new_width, new_height) == 0) {
+            printf("Erreur écriture image : %s\n", out);
+        }
+
+        printf("Voir le document: %s\n", out);
+        
+        free_image_data(data);
+       
+}
+    
+ 
+
 

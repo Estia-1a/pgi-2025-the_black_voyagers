@@ -104,6 +104,10 @@ int main(int argc, char **argv) {
     color_desaturate(configuration.filenames[0]); 
   }
 
+  if ( strcmp( configuration.command, "scale_nearest" ) == 0 ) {
+    scale_nearest(configuration.filenames[0], configuration.arguments[0]); 
+  }
+
   return 0;
 }
 
