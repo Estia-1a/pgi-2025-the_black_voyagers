@@ -722,9 +722,27 @@ void scale_crop(char *source_path, int center_x, int center_y, int width, int he
  
     if (first_x<0) first_x=0;
     if (first_y<0) first_y=0;
-    if (first_x + width > original_width) width = original_width - first_x;
-    if (first_y + height > original_height) height = original_height - first_y;
- 
+    // si on sort de l'image a gauche, on reduit la largeur
+    if (first_x < 0) {
+        width = width + first_x; // first_x est negatif donc on enleve
+        first_x = 0;
+    }
+    
+    // si on sort de l'image en haut, on reduit la hauteur
+    if (first_y < 0) {
+        height = height + first_y; // first_y est negatif donc on enleve
+        first_y = 0;
+    }
+    
+    // si on sort de l'image a droite
+    if (first_x + width > original_width) {
+        width = original_width - first_x;
+    }
+    
+    // si on sort de l'image en bas
+    if (first_y + height > original_height) {
+        height = original_height - first_y;
+    }
    
     unsigned char* cropped_data = malloc(width*height*n);
    
