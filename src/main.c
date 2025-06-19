@@ -108,6 +108,11 @@ int main(int argc, char **argv) {
     scale_nearest(configuration.filenames[0], configuration.arguments[0]); 
   }
 
+  if ( strcmp( configuration.command, "scale_bilinear" ) == 0 ) {
+
+    scale_bilinear(configuration.filenames[0], configuration.arguments[0]); 
+  }
+
   return 0;
 }
 

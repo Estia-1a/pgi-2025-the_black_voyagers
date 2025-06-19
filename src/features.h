@@ -24,5 +24,6 @@ void mirror_vertical(char *filename);
 void mirror_total(char *filename);
 void color_desaturate(char *filename);
 void scale_nearest(char *filename, char* arg);
+void scale_bilinear(char *filename, char *arg);
 
 #endif
